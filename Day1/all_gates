@@ -1,1 +1,13 @@
+module gates(
+             input ain,bin,
+             output reg  [6:0]yout   );
+ and g1(yout[0],ain,bin);
+ or  g2(yout[1],ain,bin);
+ not g3(yout[2],ain);
+ nand g4(yout[3],ain,bin);
+nor g5(yout[4],ain,bin);
+xor g6(yout[5],ain,bin);
+xnor g7(yout[6],ain,bin);
+
+endmodule 
 
