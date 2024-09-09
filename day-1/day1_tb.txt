@@ -1,0 +1,13 @@
+module tb_day1;
+wire [6:0]yout;
+reg ain,bin;
+gates dut(ain,bin,yout);
+initial begin
+ain=1'b0;bin=1'b0;
+#100 ain=1'b0;bin=1'b1;
+#100 ain=1'b1;bin=1'b0;
+#100 ain=1'b1;bin=1'b1;
+end
+  endmodule
+  
+  
