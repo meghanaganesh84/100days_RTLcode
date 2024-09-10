@@ -1,0 +1,21 @@
+module uni_gates(
+                  input a,b,
+                  output   y_not,y_and,y_or,y_xor,y_xnor
+                  );
+    //basic gates
+    //not gate ----> negation of and
+    wire w1,w2,w3,w4,w5,w6;
+    nand g0(w1,a,a);//not_a
+    nand g1(w2,b,b);//not_b
+    assign y_not=w1;
+    nand g2(y_and,w1,w1);
+    nand g3(y_or,w1,w2);
+    //deribed gates
+    nand g4(w3,a,w2);
+    nand g5(w4,w1,b);
+    nand g6(y_xor,w3,w4);
+    nand g7(y_xnor,y_xor,y_xor);
+    
+   endmodule
+
+
