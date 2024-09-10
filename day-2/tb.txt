@@ -1,0 +1,26 @@
+module tb_uni_gates;
+          
+          reg a,b;
+          wire y_not,y_and,y_or,y_xor,y_xnor;
+          
+          uni_gates dut (a,b,y_not,y_and,y_or,y_xor,y_xnor);
+          
+          initial  
+          begin
+          a=1'b0;b=1'b0;#10
+          a=1'b0;b=1'b1;#10
+          a=1'b1;b=1'b0;#10
+          a=1'b1;b=1'b1;
+          end
+          initial begin 
+          $monitor ("At time %t  A=%b B=%b Y_not=%b Y_and=%b Y_or=%b Y_xor=%b Y_xnor=%b ",$time ,a,b,y_not,y_and,y_or,y_xor,y_xnor);
+          end
+          initial
+          begin
+          #100
+          $finish();
+          end
+          
+          
+  
+endmodule
