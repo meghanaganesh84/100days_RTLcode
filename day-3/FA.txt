@@ -1,0 +1,13 @@
+module FA(  output Carry,Sum,
+            input a,b,c );
+       wire s,c1,c2;
+       ha u1(c1,s,a,b);
+       ha u2 (c2,Sum,s,c);
+       or g0(Carry,c1,c2);
+endmodule 
+       
+module ha  (   output c,s,
+               input a,b );
+          assign s=a^b;
+          assign c=a&b;
+endmodule 
