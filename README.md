@@ -54,7 +54,7 @@ Day-1: All basic,universal,derived gates!
 
 Day-2: Gates implementation using universal gates!
 
-Day-3: verilog operators!
+Day-3: FA using HA!
 
 #### Tools and Technologies
 
