@@ -1,0 +1,4 @@
+module RCA (input [0:3]a,b,
+           input c,
+           output [0:3]sum,
+           output Carry);
