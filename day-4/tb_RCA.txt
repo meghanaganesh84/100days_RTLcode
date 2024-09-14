@@ -1,1 +1,15 @@
-
+module tb_RCA;
+ reg [3:0] a, b;
+ reg c;
+ wire [3:0] sum;
+ wire carry;
+ RCA dut (.a(a),.b(b),.c(c),.sum(sum),.carry(carry));
+ initial begin
+ a=4'b0000;b=4'b0000;c=1'b0;
+ #5 a=4'b0011;b=4'b0101;c=1'b0;
+ #5 a=4'b1010;b=4'b1100;c=1'b1;
+ #5 a=4'b1111;b=4'b1111;c=1'b1;
+ #5 a=4'b1001;b=4'b0110;c=1'b0;
+ #5 $finish;
+ end
+endmodule
