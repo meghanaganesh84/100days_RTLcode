@@ -1,1 +1,16 @@
-
+module tb_asyncounter;
+reg clk,rst;
+wire  [3:0]q;
+asyncounter dut (clk,rst,q);
+always  #5 clk= ~clk;
+initial begin
+clk=0;
+rst=1;
+#10 rst=0;
+#100;
+$stop;
+end
+initial begin
+$monitor("Time = %0t | reset = %b | q = %b", $time, rst, q);
+end
+endmodule
