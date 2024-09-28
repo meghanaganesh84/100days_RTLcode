@@ -1,0 +1,18 @@
+module tb_modNcounter;
+wire [3:0]q;
+reg clk,rst,up_down;
+modNupdowncounter dut(clk,rst,up_down,q);
+always #5 clk=~clk;
+initial begin
+clk=0;
+rst=1;
+up_down=1;
+#10 rst=0;
+#100 up_down=0;
+#100 $stop ();
+end
+initial begin
+$monitor ("At time reset=%b,Up_down=%b,Q=%b",$time ,rst,up_down,q);
+end
+
+endmodule
