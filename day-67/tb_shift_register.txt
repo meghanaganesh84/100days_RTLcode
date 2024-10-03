@@ -5,12 +5,13 @@ reg [3:0]data_in;
 shift_register dut (clk,rst,data_in,data_out);
 initial
 begin
-clk=0;rst=1; data_in=4'b0100
+clk=0;rst=1; data_in=4'b0100;
 #10 rst=0;
 #10 data_in=4'b1100;
 #25 data_in=4'0101;
 #50 $finish();
 end
+always #5clk=~clk;
 initial
 $monitor ("At time %t reset =%b  data_in=%b ;data_out=%b",$time,rst,data_in,data_out);
 endmodule
