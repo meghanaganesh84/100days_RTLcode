@@ -1,7 +1,7 @@
-module
-input  [3:0]data_in;
-input clk,rst;
-output [3:0] data_out;
+module shift_register(
+input  [3:0]data_in,
+input clk,rst,
+output [3:0] data_out);
 always @(posedge clk or posedge rst)
 begin
 if(rst)
