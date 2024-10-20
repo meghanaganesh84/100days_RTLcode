@@ -1,1 +1,19 @@
+module tb_dff;
+wire [3:0]Q;
+reg [3:0]din;
+reg clk,rst;
+always #5 clk =~ clk;
+dff dut (.clk(clk),.rst(rst),.din(din),.Q(Q));
+initial begin
+rst=1;
+clk=0;
+din=4'b0000;
+#10
+rst=0;din=0;
+#5 din=4'b1001;
+#5 din=4'b1010;
+#5 din=4'b0011;
+#5 din=4'b1111;
+end
+endmodule
 
