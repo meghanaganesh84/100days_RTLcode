@@ -1,1 +1,17 @@
+module tb_shift_register;
+wire [3:0]data_out;
+reg clk,rst,serial_in,shift_en;
+shift_register dut(clk,rst,serial_in,shift_en,data_out);
+always #5 clk=~clk;
+initial begin
+clk=0;rst=1;
+#10
+#10 rst=0;shift_en=1;serial_in=1;
+#10 serial_in=0;
+#10 serial_in=1;
+#10 serial_in=1;
+#15 shift_en=0;
+#25  $finish();
+end
+endmodule
 
