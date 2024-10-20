@@ -1,0 +1,18 @@
+module tb_register;
+wire [3:0]qbar,q;
+reg clk,rst;
+reg [3:0]d;
+register dut (.clk(clk),.rst(rst),.d(d),.q(q),.qbar(qbar));
+initial begin
+clk=0;
+forever  #5 clk=~clk;
+end
+initial begin
+#10 rst=1;d=4'b0000;
+#10 rst=0;d=4'b1011;
+#10 d=4'b0101;
+#10 d=4'b1001;
+#10 d=4'b0011;
+#25 $finish;
+end
+endmodule
