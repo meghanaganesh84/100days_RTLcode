@@ -1,1 +1,22 @@
-
+module tb_reg;
+wire so;
+wire [3:0]temp;
+reg si,clk,rst;
+siso dut (.clk(clk),.rst(rst),.si(si),.so(so),.temp(temp));
+initial 
+begin
+clk=0;
+forever #5 clk=~clk;
+end
+initial begin
+ rst =1;
+#10 rst =0;si=1;
+#10 si=0;
+#10 si= 1;
+#10 si=0;
+#25  $finish();
+end
+initial begin
+$monitor ("Shift regeister : si=%b,temp=%b so=%b",si,temp,so);
+end
+endmodule
