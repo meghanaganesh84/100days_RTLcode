@@ -1,1 +1,15 @@
-
+module siso(
+input si,
+input clk,rst,
+output reg so,
+reg [3:0]temp );
+always @(posedge clk or posedge rst )
+begin 
+if (rst)
+temp<=4'b0000;
+else
+temp<={temp[2:0],si};
+end
+always @(clk)
+so<=temp[3];
+endmodule
