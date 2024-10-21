@@ -1,0 +1,16 @@
+
+module tb_pipo;
+wire [3:0]po;
+reg clk,rst;
+reg [3:0]pi;
+pipo dut (.clk(clk),.rst(rst),.po(po),.pi(pi));
+always #5 clk=~clk;
+initial begin
+clk=0;rst=1;pi=4'b0000;
+#10 rst=0;pi=4'b1010;
+#10 pi=4'b1100;
+#10 pi=4'b0111;
+#10 pi=4'b0110;
+#25 $finish ();
+end
+endmodule
