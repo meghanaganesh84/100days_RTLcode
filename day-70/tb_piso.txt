@@ -1,0 +1,18 @@
+
+module tb_piso;
+wire so,temp;
+reg clk,rst,load;
+reg [3:0]pi;
+piso dut (.clk(clk),.rst(rst),.load(load),.pi(pi),.temp(temp),.so(so));
+
+always #5 clk=~clk;
+initial begin
+clk=0;rst=1;pi=4'b1010;
+#10 rst=0;load=1;pi=4'b1100;
+#10 pi=4'b1100;
+#10 pi=4'b0101;
+#10 pi=4'b0010;
+#10 pi=4'b1110;
+#25 $finish ();
+end
+endmodule
