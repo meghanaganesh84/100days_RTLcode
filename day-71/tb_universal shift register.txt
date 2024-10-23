@@ -1,0 +1,17 @@
+module tb_uni_shft_reg;
+wire [3:0]q;
+reg [3:0]d;
+reg [1:0]mode;
+reg clk,rst;
+uni_shft_reg dut (.clk(clk),.rst(rst),.d(d),.mode(mode),.q(q));
+always #5 clk=~clk;
+initial begin
+clk=0;rst=1;d=4'b0000;mode=2'b00;
+#5 rst=0;mode=2'b11;d=4'b1100;
+#10 mode=2'b01;
+#10 mode=2'b10;
+#10 mode=2'b00; 
+
+#25 $finish(); 
+end
+endmodule
