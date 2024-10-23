@@ -1,0 +1,12 @@
+module tb_non_binary_ripple_counter;
+reg clk,rst;
+wire [3:0]q;
+non_binary_ripple_counter dut (.clk(clk),.rst(rst),.q(q));
+always #5 clk=~clk;
+initial begin
+rst=1;clk=0;
+#10 rst=0;
+#200;
+#25 $finish();
+end
+endmodule
