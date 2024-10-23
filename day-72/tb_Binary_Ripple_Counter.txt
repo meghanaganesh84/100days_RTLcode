@@ -1,0 +1,14 @@
+
+module tb_Binary_Ripple_Counter;
+wire [3:0]q;
+reg clk,rst;
+Binary_Ripple_Counter dut (.clk(clk),.rst(rst),.q(q));
+always #5 clk=~clk;
+initial 
+begin
+rst=1;clk=0;
+#10; rst=0;
+# 200;
+# 25 $finish ();
+end 
+endmodule
