@@ -1,0 +1,13 @@
+module barrel_shifter(
+    input [7:0]data_in,
+    input [2:0]shift_amount,
+    input dir,
+    output reg [7:0]data_out);
+    always @(* )
+    begin
+    if(dir)
+    data_out<=(data_in<<shift_amount)|(data_in>>(8-shift_amount));
+    else 
+    data_out<=(data_in>>shift_amount)|(data_in<<(8-shift_amount));
+    end
+endmodule
