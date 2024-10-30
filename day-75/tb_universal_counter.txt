@@ -1,0 +1,16 @@
+module tb_universal_counter;
+reg clk,rst;
+reg up_down;
+wire [3:0]count;
+universal_counter dut (.clk(clk),.rst(rst),.up_down(up_down),.count(count));
+
+always #5 clk=~clk;
+initial begin
+clk=0;rst=1;up_down=1;
+#10 rst=0;up_down=0;
+#175 up_down=1;
+#200 up_down=0; 
+end 
+
+
+endmodule
