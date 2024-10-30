@@ -1,0 +1,13 @@
+module tb_barrel_shifter;
+reg dir;
+reg [7:0]data_in;
+reg [2:0]shift_amount;
+wire [7:0]data_out;
+barrel_shifter  dut (.data_in(data_in),.data_out(data_out),.dir(dir),.shift_amount(shift_amount));
+initial begin 
+data_in=8'b00011100;dir=1;shift_amount=3'b011;
+#10 data_in=8'b00101001;dir=0;shift_amount=3'b001;
+#50 data_in=8'b01010011;dir=1;shift_amount=3'b100;
+#50 data_in=8'b01101110;dir=0;shift_amount=3'b010;
+end
+endmodule
