@@ -1,0 +1,47 @@
+module fifo_32bit_depth(
+    input clk,
+    input rst,
+    input r_en,
+    input w_en,
+    input [7:0] d_in,
+    output reg [7:0] d_out,
+    output reg fu,
+    output reg em
+);
+
+    parameter dp = 32;
+    parameter aw = 5;
+    
+    reg [aw-1:0] wp, rp;
+    reg [aw:0] fifo_count;
+    reg [7:0] mem_ary[0:dp-1];
+
+    always @(posedge clk or posedge rst) begin
+        if (rst) begin
+            fu <= 0;
+            em <= 1;
+            fifo_count <= 0;
+            wp <= 0;
+            rp <= 0;
+        end else begin
+            fu <= (fifo_count == dp);
+            em <= (fifo_count == 0);
+        end
+    end
+
+    always @(posedge clk) begin
+        if (w_en && !fu) begin
+            mem_ary[wp] <= d_in;
+            wp <= wp + 1;
+            fifo_count <= fifo_count + 1;
+        end
+    end
+
+    always @(posedge clk) begin
+        if (r_en && !em) begin
+            d_out <= mem_ary[rp];
+            rp <= rp + 1;
+            fifo_count <= fifo_count - 1;
+        end
+    end
+endmodule
