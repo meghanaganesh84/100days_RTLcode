@@ -1,0 +1,24 @@
+module tb_mem_32bit;
+  reg clk;
+  reg [19:0] ad;
+  reg [31:0] wd;
+  wire [31:0] rd;
+  wire r_en, w_en;
+  reg r_en_tb, w_en_tb;
+  assign r_en = r_en_tb;
+  assign w_en = w_en_tb;
+  memory_32bit dut (.clk(clk),.ad(ad),.w_en(w_en),.r_en(r_en),.wd(wd),.rd(rd));
+  always #5 clk = ~clk;
+  initial begin
+    clk = 0; ad = 0; wd = 0; w_en_tb = 0; r_en_tb = 0;
+    #10 ad = 20'h00001; w_en_tb = 1; wd = 32'hea98d821;
+    #50 w_en_tb = 0;
+    #10 ad = 20'h00001; r_en_tb = 1;
+    #50 r_en_tb = 0;
+    #10 ad = 20'h00002; w_en_tb = 1; wd = 32'h82753146;
+    #50 w_en_tb = 0;
+    #10 ad = 20'h00002; r_en_tb = 1;
+    #50 r_en_tb = 0;
+    #50 $finish;
+  end
+endmodule
