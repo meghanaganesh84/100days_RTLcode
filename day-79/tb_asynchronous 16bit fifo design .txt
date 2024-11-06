@@ -1,0 +1,44 @@
+module tb_asyn_fifo_16bit;
+wire [15:0]data_out;
+wire full,empty;
+reg [15:0]data_in;
+reg w_en,r_en,clk_wr,clk_rd;
+asyn_fifo_16bit  dut (.clk_wr(clk_wr),
+                      .clk_rd(clk_rd),
+                      .data_in(data_in),
+                      .data_out(data_out),
+                       .w_en(w_en),
+                       .r_en(r_en),
+                       .full(full),
+                       .empty(empty) );
+
+always #10 clk_wr=~clk_wr;
+always #15 clk_rd=~clk_rd;
+
+integer i;
+initial begin
+clk_wr=0;clk_rd=0;data_in=16'hABCD;
+w_en=0;r_en=0;
+
+#20
+w_en=1;
+for (i=0;i<16;i=i+1) begin
+data_in=16'hA000+i;
+#20 ;
+end
+w_en=0;
+#40
+
+
+r_en=1;
+for (i=0;i<16;i=i+1) begin
+#20;
+end
+r_en=0;
+
+#200
+$stop();
+
+
+end
+endmodule
