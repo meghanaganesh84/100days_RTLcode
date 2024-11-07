@@ -1,0 +1,18 @@
+module single_port_RAM_32bit(
+input clk,
+input [31:0]data_in,
+input wr_en,
+input [3:0]ad,
+output reg  [31:0]data_out
+    );
+reg [31:0] mem_ary[0:15];
+always @(posedge clk) begin
+if(wr_en) begin
+mem_ary[ad]<=data_in;
+end
+else begin
+data_out<=mem_ary[ad];
+end
+end
+
+endmodule
