@@ -1,0 +1,33 @@
+module tb_single_port_RAM_32bit;
+reg clk;
+reg [31:0]data_in;
+reg wr_en;
+reg [3:0]ad;
+wire  [31:0]data_out;
+single_port_RAM_32bit dut (.clk(clk),
+                           .data_in(data_in),
+                           .data_out(data_out),
+                           .ad(ad),
+                           .wr_en(wr_en) );
+always #5 clk=~clk;
+integer i;
+initial begin
+clk=0;wr_en=0;data_in=0;ad=0;
+#10
+wr_en=1;
+for ( i=0;i<16;i=i+1) begin
+ad=i;
+data_in=32'hA000_0000 +i;
+#20;
+end
+wr_en=0;
+#20;
+for (i=0;i<16;i=i+1) begin
+ad=i;
+#20;
+end
+
+#200;
+$stop();
+ end                         
+endmodule
