@@ -1,0 +1,34 @@
+module mealy_fsm_1st_process (
+input clk,rst,t,
+output reg out );
+parameter reg s0=2'b00;
+parameter reg s1=2'b01;
+reg [1:0]cs,ns;
+//state transition block
+always @(posedge clk or posedge rst ) begin
+if(rst) begin
+cs<=s0;
+end
+else begin
+cs<=ns;
+end
+end
+
+// next state logic block 
+always @(*) begin
+case (cs)
+s0:ns =(t)? s1:s0;
+s1:ns=(t)?s0:s1;
+default ns <=s0;
+endcase
+end
+
+//output logic block
+always @(cs or t) begin
+case (cs)
+s0:out=(t)?1'b1:1'b0;
+s1:out=(t)?1'b0:1'b1;
+default out=1'b0;
+endcase
+end
+endmodule
