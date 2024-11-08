@@ -1,0 +1,21 @@
+module tb_mealy_fsm_1st_process ;
+reg clk;
+reg rst;
+reg t;
+wire out;
+mealy_fsm_1st_process dut (.clk(clk),
+                           .rst(rst),
+                           .t(t),
+                           .out(out));
+always #5 clk=~clk;
+initial begin
+clk=0;rst=0;t=0;
+rst=1;
+#10 t=1;
+#10 t=0;
+#20 t=1;
+#20 t=0;
+#40 
+$stop();
+end   
+endmodule
