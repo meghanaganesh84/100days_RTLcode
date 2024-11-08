@@ -1,0 +1,30 @@
+module tb_dual_port_ram;
+reg clk;
+reg [4:0]addr_a,addr_b;
+reg [31:0]data_in_a,data_in_b;
+reg we_a,we_b;
+wire [31:0]data_out_a,data_out_b;
+   dual_port_ram  dut (.clk(clk),
+                       .data_in_a(data_in_a),
+                       .data_out_a(data_out_a),
+                       .data_in_b(data_in_b),
+                       .data_out_b(data_out_b),
+                       .we_a(we_a),
+                       .we_b(we_b),
+                       .addr_a(addr_a),
+                       .addr_b(addr_b));
+always #5 clk=~clk;
+initial begin
+clk=0;addr_a=0;addr_b=0;we_a=0;we_b=0;data_in_a=32'h5A5A5A5A;data_in_b=32'h3B3B3B3B;
+ #20
+we_a=1;addr_a=5'd1;data_in_a=32'hA8B2_C5D6;
+we_b=1;addr_b=5'd2;data_in_b=32'hE826_BCDA;
+#20
+we_a=0;
+we_b=0;
+#20
+addr_a=5'd1;addr_b=5'd2;
+#20
+$stop();
+end
+endmodule
