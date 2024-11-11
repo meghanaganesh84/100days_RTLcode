@@ -1,0 +1,49 @@
+module sequence_detector_1011(
+input clk,rst,in,
+output reg out  );
+parameter s0=3'b000,s1=3'b001,s2=3'b010,s3=3'b011;
+reg [2:0]cs,ns;
+always @(posedge clk or posedge rst) begin
+if (rst) begin 
+cs<=s0;
+out<=0;
+end
+else begin
+cs<=ns;
+end 
+end
+
+always @(cs or in ) begin
+out=0;
+case (cs)
+s0: if(in) begin
+ns=s1;
+end
+else begin
+ns=s0;
+end
+s1: if(in) begin
+ns=s1;
+end
+else begin
+ns=s2;
+end
+s2:if (in) begin
+ns=s3;
+end
+else begin
+ns=s2;
+end
+s3: if(in) begin
+out=1;
+ns=s3;
+end
+else begin
+ns=s2;
+end
+default: begin
+cs=s0;
+end
+endcase
+end
+endmodule
