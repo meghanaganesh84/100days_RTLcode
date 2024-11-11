@@ -1,0 +1,33 @@
+module mealy_fsm_2nd_process(
+input clk,rst,t,
+output reg out
+    );
+reg cs,ns;
+parameter s0=1'b0,
+          s1=1'b1;
+always @(posedge clk or posedge rst ) begin
+if(rst) begin
+cs<=s0;
+end
+else  begin
+cs<=ns;
+end
+end
+
+always @(cs or t) begin
+case (cs)
+s0: begin
+out=(t) ?1:0;
+ns=(t)? s1:s0;
+end
+s1: begin
+out=(t)?0:1;
+ns=(t)? s1:s0;
+end
+default : begin
+out=0;
+ns= s0;
+end
+endcase
+end
+endmodule
