@@ -1,11 +1,22 @@
+
 module moore_FSM_overlap_seq_detector(
 input clk,rst,in,
 output reg out );
-parameter s0=3'b000,s1=3'b001,s2=3'b010,s3=3'b011,s4=3'b100,s5=3'b101;
+parameter A=3'b000,B=3'b001,C=3'b010,D=3'b011,E=3'b100;
 reg [2:0]cs,ns;
-always @(posedge clk or posedge  rst ) begin
+always @(cs) begin
+   case(cs)
+        A:out = 0; 
+        B:out= 0; 
+        C:out = 0; 
+        D:out= 0;
+        E:out = 1; 
+        default: out = 0;
+    endcase
+end
+always @(posedge clk or posedge rst ) begin
 if (rst) begin
-cs<=s0;
+cs<=A;
 out<=0;
 end
 else begin
@@ -14,32 +25,24 @@ end
 end
 always @(* ) begin
 case (cs) 
-s0: begin 
-ns=(in) ?s1:s0;
-out=0;
+A: begin 
+ns=(in) ? B:A;
 end
-s1: begin 
-ns=(in) ?s1:s2;
-out=0;
+B: begin 
+ns=(in) ? B:C;
 end
-s2: begin 
-ns=(in) ?s3:s0;
-out=0;
+C: begin 
+ns=(in) ? B:D;
 end
-s3: begin 
-ns=(in) ?s4:s2;
-out=0;
+D: begin 
+ns=(in) ? E:A;
 end
-s4: begin 
-ns=(in) ?s1:s5;
-out=1;
-end
-s5: begin 
-ns=(in) ?s1:s0;
-out=0;
+E: begin 
+ns=(in) ? B:C;
+out =1;
 end
 default :  begin
-cs=s0;
+cs=A;
 out=0;
 end
 endcase
