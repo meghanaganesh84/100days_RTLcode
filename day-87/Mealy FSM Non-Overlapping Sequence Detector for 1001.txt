@@ -1,0 +1,40 @@
+
+module Mealy_FSM_Non_overlap_sequence_detector(
+input clk,rst, in,
+output reg out     );
+parameter   s0=2'b00,
+            s1=2'b01,
+            s2=2'b10,
+            s3=2'b11;
+            reg [1:0] cs,ns;
+ always @(  posedge clk or posedge  rst ) begin 
+ if (rst) begin
+cs<=ns;
+out<=0;
+ end
+ end 
+ always @( * ) begin
+  case (cs ) 
+s0: begin
+ns= (in)? s1:s0;
+out=0;
+end
+s1: begin 
+ns= (in)? s1:s2;
+out=0;
+end  
+s2: begin
+ns=(in)? s1:s3;
+out=0;
+end
+s3: begin
+ns=(in)?s0:s0;
+out = (in) ? 1 : 0;
+end
+default : begin 
+ ns=s0;
+out=0;
+end 
+endcase
+end
+endmodule
