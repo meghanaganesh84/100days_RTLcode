@@ -1,0 +1,68 @@
+
+module mealy_seq_detector_1010(
+    input clk,
+    input rst,
+    input seq_in,
+    output reg seq_detected
+);
+
+    // State Encoding
+  parameter  
+        S0=3'b00, // Initial state
+        S1=3'b01, // Detected 1
+        S2=3'b10, // Detected 10
+        S3=3'b11,// Detected 101
+        S4=3'b100;
+    reg [1:0]current_state, next_state;
+
+    // Sequential Logic: State Transition
+    always @(posedge clk or posedge rst) begin
+        if (rst)
+            current_state <= S0;
+        else
+            current_state <= next_state;
+    end
+
+    // Combinational Logic: Next State and Output Logic
+    always @(*) begin
+        // Default values
+        next_state = current_state;
+        seq_detected = 1'b0;
+
+        case (current_state)
+            S0: begin
+                if (seq_in == 1'b1)
+                    next_state = S1;
+            end
+
+            S1: begin
+                if (seq_in == 1'b0)
+                    next_state = S2;
+                else
+                    next_state = S1;
+            end
+
+            S2: begin
+                if (seq_in == 1'b1)
+                    next_state = S3;
+                else
+                    next_state = S0;
+            end
+
+            S3: begin
+                if (seq_in == 1'b0) begin
+                    next_state = S4;
+                    seq_detected = 1'b1; // Output detected on the transition
+                end else
+                    next_state = S1;
+            end
+
+            S4: begin
+                if (seq_in == 1'b1)
+                    next_state = S1;
+                else
+                    next_state = S0;
+            end
+        endcase
+    end
+endmodule
