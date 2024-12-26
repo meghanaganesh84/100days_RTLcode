@@ -1,0 +1,44 @@
+
+module moore_fsm_11_00 (
+input clk,rst,seq_in,
+output reg seq_detected);
+parameter IDLE = 2'b00,    
+          DETECT_1 = 2'b01, 
+          DETECT_11 = 2'b10, 
+          DETECT_00 = 2'b11;  
+reg [1:0] current_state, next_state;
+always @(posedge clk or posedge rst) begin
+if (rst)
+current_state <= IDLE;
+else
+current_state <= next_state;
+end
+always @(*) begin
+next_state = current_state;
+seq_detected = 0;
+case (current_state) 
+IDLE: begin
+if (seq_in == 1)
+next_state = DETECT_1;
+else if (seq_in == 0)
+next_state = DETECT_00;
+end
+DETECT_1: begin
+if (seq_in == 1)
+next_state = DETECT_11;
+else
+next_state = IDLE;
+end
+
+DETECT_11: begin
+seq_detected = 1; // "11" detected
+next_state = IDLE;
+end
+
+DETECT_00: begin
+seq_detected = 1; // "00" detected
+next_state = IDLE;
+end
+endcase
+end
+endmodule
