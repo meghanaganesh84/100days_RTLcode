@@ -1,0 +1,21 @@
+module tb_fibonacci;
+reg clk,rst;
+wire [5:0]value;
+wire rd;
+fibonacci dut (
+        .clk(clk),
+        .rst(rst),
+        .value(value),
+        .rd(rd)
+    );
+always begin
+#5 clk = ~clk;  // 10ns period, 50 MHz clock
+end
+initial begin
+clk =0;rst =1;
+#5 rst =0;
+#200;
+$monitor("At time %t, Fibonacci Number: %d ", $time, value);
+#200 $finish;
+end
+endmodule
