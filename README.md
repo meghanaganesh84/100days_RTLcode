@@ -239,7 +239,7 @@ Day-89: 1010 sequence detection using Mealy FSM
 
 Day-90: Moore FSM sequence detector to detect the 11/00
 
-Day-91: Mealy FSM -NON overlapping 1010 sequence 
+Day-91: Fibonacci Sequence Generator using FSM
 
 Day-92: Sequence Generator (Prime Number :2,3,5,7,11)
 
