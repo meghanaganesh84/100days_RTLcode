@@ -1,0 +1,59 @@
+module  prime_sequence_fsm (
+input clk,rst,en,
+output reg [3:0]pr,
+output reg done );
+parameter s0=3'b000,
+          s1=3'b001,
+          s2=3'b010,
+          s3=3'b011,
+          s4=3'b100,
+          s5=3'b101,
+          s6=3'b110;
+reg [2:0]cs,ns;
+always @(posedge clk or posedge rst ) begin 
+if (rst) begin 
+cs<=s0;
+end else begin 
+cs<=ns;
+end
+end
+always @(*) begin 
+ns=cs;
+pr=4'b0000;
+done=0;
+case(cs) 
+s0:begin 
+if(en)
+ns=s1;
+end
+s1:begin
+pr=4'd2;
+ns=s2;
+end
+s2:begin
+pr=4'd3;
+ns=s3;
+end
+s3:begin
+pr=4'd5;
+ns=s4;
+end
+s4:begin
+pr=4'd7;
+ns=s5;
+end
+s5:begin
+pr=4'd11;
+ns=s6;
+end
+s6: begin
+done=1;
+if(!en) 
+ns=s0;
+end
+default: begin
+ns=s0;
+end
+endcase
+end                   
+endmodule  
