@@ -1,0 +1,23 @@
+module tb_prime_sequence_fsm;
+reg clk, rst, en;
+wire [3:0] pr;
+wire done;
+prime_sequence_fsm uut (
+        .clk(clk),
+        .rst(rst),
+        .en(en),
+        .pr(pr),
+        .done(done));
+always begin
+#5 clk = ~clk; // 10ns clock period
+end
+initial begin
+clk =0;rst =1;en =0;
+#10 rst =0;
+#10 en =1;
+#200 $finish;
+end
+initial begin
+$monitor("Time: %0t | Prime Number: %d | Done: %b", $time, pr, done);
+end
+endmodule
