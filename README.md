@@ -249,9 +249,9 @@ Day-94:mealy fsm 110 overlapping sequence detector
 
 Day-95:Mealy FSM  Sequence Detector (1011) with Overlapping
 
-Day-96:State Machine Conversion (Mealy to Moore)
+Day-96:2-Bit Up/Down Counter Using Moore FSM
 
-Day-97:State Machine Conversion (Moore to Mealy)
+Day-97:Even Parity Generator Using Mealy FSM
 
 Day-98:Mealy FSM for 4-bit Serial Adder
 
