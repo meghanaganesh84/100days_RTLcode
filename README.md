@@ -249,7 +249,7 @@ Day-94:mealy fsm 110 overlapping sequence detector
 
 Day-95:Mealy FSM  Sequence Detector (1011) with Overlapping
 
-Day-96: Mealy Machine Sequence Detector to Detect 101 Overlapping Sequence ..
+Day-96: FSM-Based 3-Bit Up/Down Counter 
 
 Day-97:Even Parity Generator Using Mealy FSM
 
