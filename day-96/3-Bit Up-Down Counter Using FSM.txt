@@ -1,0 +1,32 @@
+
+module up_down_3bit_counter(
+input clk,rst ,up_down,
+output reg [2:0] count   );
+parameter s0=3'b000,s1=3'b001,s2=3'b010,s3=3'b011,
+          s4=3'b100,s5=3'b101,s6=3'b110,s7=3'b111;  
+reg [2:0]cs,ns; 
+always @(posedge clk or posedge rst ) 
+if (rst ) 
+cs<= s0;
+else 
+cs <= ns; 
+always @(*)  begin
+case (cs) 
+s0: ns = up_down ? s1:s7;
+s1: ns = up_down ? s2:s0;
+s2: ns = up_down ? s3:s1;
+s3: ns = up_down ? s4:s2;
+s4: ns = up_down ? s5:s3;
+s5: ns = up_down ? s6:s4;
+s6: ns = up_down ? s7:s5;
+s7: ns = up_down ? s0:s6;
+default ns =s0;
+endcase
+end
+always @(posedge clk or posedge rst )  begin 
+if (rst ) 
+count <=3'b000;
+else 
+count <= cs;
+end   
+endmodule 
