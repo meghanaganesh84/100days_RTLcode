@@ -1,0 +1,16 @@
+module tb_up_down_3bit_counter;
+wire [2:0]count;
+reg clk,rst,up_down;
+up_down_3bit_counter  dut(.clk(clk),.up_down(up_down),.rst(rst ),.count(count));
+always #5 clk= ~clk;
+initial begin 
+clk=0;
+rst=1;
+up_down=1;
+#10 rst=0;
+#85 up_down=0;
+#95 up_down=1;
+#100 $stop();
+$monitor ("Time =%t| Clk=%b|Up_down=%b|Count=%b",$time,clk,up_down,count);
+end
+endmodule
