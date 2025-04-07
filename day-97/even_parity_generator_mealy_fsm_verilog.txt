@@ -1,0 +1,44 @@
+
+module parity_generator(
+input clk,rst,data_in,
+output reg  parity_out    );
+parameter  EVEN=1'b0,ODD=1'b1;
+reg cs,ns;
+always @(posedge clk  or posedge rst )  begin 
+if (rst )  begin
+cs <= EVEN;
+end
+else begin
+cs <= ns;
+end
+end
+always  @(*) begin 
+case( cs )  
+EVEN: begin
+if (data_in )  begin 
+ns = ODD;
+parity_out=1;
+end 
+else begin 
+ns=EVEN; 
+parity_out=0;
+end
+end
+ODD:begin
+if(data_in )  begin 
+ns=EVEN ;
+parity_out =0;
+end
+else begin
+ns=ODD;
+parity_out=1;
+end
+end
+default: 
+begin
+ns =EVEN;
+parity_out=0;
+end
+endcase
+end
+endmodule
