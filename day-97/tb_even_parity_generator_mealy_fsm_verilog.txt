@@ -1,0 +1,20 @@
+
+module tb_parity_generator;
+reg clk,rst,data_in;
+wire parity_out;
+parity_generator dut (.clk(clk),.rst(rst),.data_in(data_in),.parity_out(parity_out));
+always #5 clk=~clk;
+initial begin 
+clk=0;
+rst=1;
+data_in=1'b0;
+#5 rst=0;
+#5 data_in=1'b1;
+#5 data_in=1'b1;
+#5 data_in=1'b0;
+#5 data_in=1'b1;
+#5 data_in=1'b1;
+#5 data_in=1'b0;
+#50 $stop();
+end
+endmodule
