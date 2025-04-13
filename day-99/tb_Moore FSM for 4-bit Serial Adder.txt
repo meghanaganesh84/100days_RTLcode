@@ -1,0 +1,25 @@
+
+module tb_moore_serial_adder;
+reg clk,rst;
+reg [3:0] A,B;
+wire sum_bit,carry_out;
+moore_serial_adder dut(.clk(clk),.rst(rst),.A(A),.B(B),.sum_bit(sum)bit),.carry_out(carry_out));
+initial
+beign
+clk=0;
+forever #5  clk=~clk;
+end
+initial begin
+rst=1;
+A=4'b0000;B=4'b0000;
+#10 rst=0;
+A=4'b0101;B=4'b0011;
+#50;
+$stop;
+end
+intial begin
+$monitor ("Time =%t |A=%b|B=%b |Sum bit=%b| Carry Out=%b ",$time,A,B,sum_bit,carry_out );
+end
+endmodule
+
+
