@@ -1,0 +1,29 @@
+
+module tb_serial_adder ;
+reg clk,rst;
+reg [3:0]A=4'b1101;
+reg [3:0]B=4'b1011;
+reg [3:0] a_serial,b_serial;
+reg [1:0]bit_cnt = 0;
+wire sum;
+wire done;
+serial_adder dut (.clk(clk),.rst(rst),
+                   .a(a_serial[0]),.b(b_serial[0]),
+                   .sum(sum),.done(done));
+always #5 clk=~clk;
+initial begin
+clk=0;
+rst=1;
+#1 rst=0;
+a_serial=A;
+b_serial=B;
+repeat (4) begin
+#10;
+a_serial=a_serial>>1;b_serial=b_serial>>1;
+end
+#50 $finish;
+end
+initial begin 
+$monitor ("Time=%0t |A =%b|B=%b|Sum =%b |Done=%b",$time,A,B,sum,done);
+end
+endmodule
