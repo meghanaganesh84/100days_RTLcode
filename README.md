@@ -257,7 +257,7 @@ Day-98:Mealy FSM for 4-bit Serial Adder
 
 Day-99:Moore FSM for 4-bit Serial Adder
 
-Day-100:Moore FSM using one hot FSM equation
+Day-100:gray code 3bit counter using FSM
 
 
 
