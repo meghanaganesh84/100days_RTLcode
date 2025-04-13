@@ -1,0 +1,23 @@
+
+module tb_gray_code_counter ;
+reg clk,rst;
+wire [2:0]gc;
+gray_code_counter dut (.clk(clk),.rst(rst),.gc(gc));
+
+always begin
+#5 clk =~clk;
+end
+
+initial begin 
+clk=0;rst=0;
+$display ("Applying reset.... " ) ;
+rst=1;
+#10 rst =0;
+$display ("Starting simulation..." );
+#100;
+$display ("Simulation finished.");
+end
+initial begin
+$monitor ("At time %t|Binary counter=%b| Gray code=%b",$time,dut.bc,gc);
+end
+endmodule
