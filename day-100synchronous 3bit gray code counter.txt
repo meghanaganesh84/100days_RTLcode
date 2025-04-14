@@ -1,0 +1,22 @@
+
+module gray_code_counter ( 
+input clk,rst,
+output reg [2:0]gc  );
+wire g2,g1,g0;
+reg [2:0]bc;
+assign g2=bc[2];
+assign g1=bc[2] ^bc[1];
+assign g0=bc[1] ^bc[0];
+always @(posedge clk or posedge rst )
+begin 
+if (rst ) begin 
+bc <=3'b000;
+end else begin
+bc <= bc+1;
+end
+end
+always @(bc ) begin 
+gc={g2,g1,g0} ;
+end
+endmodule
+                             
